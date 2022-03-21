@@ -1,0 +1,77 @@
+@import "~normalize.css";
+:root {
+    --main-color: #ffe44d;
+    --main-darker: #ffaa0d;
+    --main-lighter: #fff5c0;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%
+}
+
+body {
+    font-family: "Nunito", "Arial", "Helvetica", sans-serif;
+    height: 100%;
+    
+}
+
+.root {
+    height: 100%;
+    color: #ddd !important;
+}
+
+.container {
+    max-width: 992px;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 16px;
+    height: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+.content {
+    padding: 20px 0;
+}
+
+.content__sort {
+    margin-bottom: 40px;
+}
+
+.result {
+    font-size: 24px;
+}
+
+.logo {
+    width: 120px;
+    height: 31px;
+    margin: 16px 24px 16px 0;
+    background: url(../src/assets/logo.png);
+}
+
+.header {
+    padding: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.contentWrapper {
+    padding: 20px 0px;
+    flex: 1 0 auto;
+}
+
+.wrapper {
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+.ant-card-head {
+	border-bottom: 1px solid #7c6ee767 !important;
+}

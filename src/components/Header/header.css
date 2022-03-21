@@ -1,0 +1,28 @@
+.menu-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.menu {
+	min-width: 280px;
+	border-bottom: none;
+	/* display: flex; */
+	color: #7D6EE7;
+	box-sizing: border-box;
+}
+
+.menu>li:hover {
+	color: #503be9 !important;
+}
+
+.menu>li:hover::after {
+	border-bottom: 2px solid #503be9 !important;
+}
+
+.ant-menu-item-selected {
+	color: #503be9 !important;
+}
+
+.ant-menu-item-selected::after {
+	border-bottom: 2px solid #503be9 !important;
+}
