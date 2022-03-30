@@ -1,8 +1,44 @@
 .card_wrapper {
 	padding-bottom: 20px;
+	
 }
 
 .card {
-	border: 1px solid #7c6ee767
+	height: 100%;
+	border: 1px solid #7c6ee767;
+	/* border-radius: 15px; */
+	max-width: 400px;
 }
 
+.description {
+	padding-top: 20px;
+}
+
+.likeWrapper {
+	width: 60px;
+	height: 30px;
+	background-color: #fff;
+	position: absolute;
+	right: 15px;
+	top: 15px;
+	border-radius: 25px;
+	border: none;
+	padding: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 3px
+}
+
+.likeIcon {
+	line-height: 30px;
+	cursor: pointer;
+}
+
+.likeIcon_active>path {
+	fill: #df1818;
+}
+
+.likeIcon_active>path>path {
+	fill: #df1818;
+}

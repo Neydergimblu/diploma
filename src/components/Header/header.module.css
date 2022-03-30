@@ -1,6 +1,7 @@
-.menu-wrapper {
+.menuWrapper {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .menu {
@@ -9,6 +10,7 @@
 	/* display: flex; */
 	color: #7D6EE7;
 	box-sizing: border-box;
+	border-bottom: 1px solid #f0f0f0;
 }
 
 .menu>li:hover {

@@ -1,17 +1,17 @@
 import React from "react";
 
 import { Button } from "antd";
-import "./button.css";
+import s from "./button.module.css";
 
-export const ButtonContent = ({ type, text }) => {
+export const ButtonContent = ({ type, text, createPost }) => {
   
   function handlerAddPost() {
-    console.log("Есть контакт!");
+    createPost()
   }
 
   return (
     <>
-      <Button type={type} onClick={handlerAddPost}>{text}</Button>
+      <Button type={type} onClick={handlerAddPost} >{text}</Button>
     </>
   );
 };

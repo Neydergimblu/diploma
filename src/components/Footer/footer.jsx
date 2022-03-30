@@ -1,11 +1,11 @@
 import React from "react";
-import "./footer.css";
+import s from "./footer.module.css"
 
-export const FooterContent = ({ className }) => {
+export const FooterContent = () => {
   return (
     <>
       <div className="container">
-        <div className={className}>@ Diploma 2022</div>
+        <div className={s.footerContent}>@ Diploma 2022</div>
       </div>
     </>
   );

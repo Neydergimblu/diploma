@@ -26,6 +26,7 @@ body {
 }
 
 .container {
+    min-width: 500px;
     max-width: 992px;
     width: 95%;
     margin: 0 auto;
