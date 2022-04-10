@@ -1,17 +1,28 @@
 .card_wrapper {
 	padding-bottom: 20px;
-	
 }
 
 .card {
 	height: 100%;
-	border: 1px solid #7c6ee767;
+	border: 5px solid #7c6ee767;
 	/* border-radius: 15px; */
 	max-width: 400px;
+	padding-bottom: 20px;
+	overflow: hidden;
+	border-radius: 15px;
 }
 
 .description {
-	padding-top: 20px;
+	display: block;
+	display: -webkit-box;
+	/* max-width: 400px; */
+	/* font-size: 20px; */
+	-webkit-line-clamp: 4; /* количество строк */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 20px;
+	height: 85px;
 }
 
 .likeWrapper {
@@ -27,7 +38,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 3px
+	gap: 3px;
 }
 
 .likeIcon {
@@ -35,10 +46,46 @@
 	cursor: pointer;
 }
 
-.likeIcon_active>path {
+.likeIcon_active > path {
 	fill: #df1818;
 }
 
-.likeIcon_active>path>path {
+.likeIcon_active > path > path {
 	fill: #df1818;
+}
+
+.image {
+	height: 170px;
+	object-fit: cover;
+	/* height: 100%; */
+	width: 100%;
+}
+
+.linkCard {
+	color: #7D6EE7 !important;
+	position: absolute;
+	right: 15px;
+	bottom: 15px;
+}
+
+.linkCard a {
+	color: #7D6EE7 !important;
+}
+
+.deleteButton {
+	color: #7D6EE7;
+	position: absolute;
+	left: 15px;
+	bottom: 15px;
+	cursor: pointer;
+}
+
+.titleBlock {
+	font-size: 18px;
+	font-weight: 900;
+	margin-bottom: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color:#7D6EE7;
 }

@@ -3,9 +3,13 @@ import React, { useState, useEffect } from "react";
 import { Layout } from "antd";
 import { HeaderContent } from "./components/Header/header";
 import { FooterContent } from "./components/Footer/footer";
-import { PostList } from "./components/PostList/postList";
+
 import serverApi from "./utils/serverApi";
 import { CurrentUserContext } from "./context/currentUserContext";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { MainPage } from "./pages/MainPage";
+import { OneCardPage } from "./pages/OneCardPage";
+import { Page404 } from "./pages/Page404";
 
 const { Header, Footer, Content } = Layout;
 
@@ -13,52 +17,56 @@ export const App = () => {
   //Стейты
   const [content, setContent] = useState([]);
   const [userInformation, setUserInformation] = useState({});
-  const [postFlag, setPostFlag] = useState(false)
+  const [postFlag, setPostFlag] = useState(false);
 
   //Эффекты
-  useEffect(()=> {
+  useEffect(() => {
     serverApi.getPosts()
-    .then(
-      (newPostData) => {
-        setContent(newPostData);
+    .then((newPostData) => {
+      setContent(newPostData);
+    })
+    .catch(
+      (error) => {
+        console.log(error);
       }
     )
     setPostFlag(false);
-  },[postFlag])
+  }, [postFlag]);
+
 
   useEffect(() => {
-    Promise.all([serverApi.getPosts(), serverApi.getUserInfo()]).then(
+    Promise.all([serverApi.getPosts(), serverApi.getUserInfo()])
+    .then(
       ([postsData, userData]) => {
         setContent(postsData);
         setUserInformation(userData);
-        console.log(postsData)
       }
-    );
+    )
+    .catch(
+      (error) => {
+        console.log(error);
+      }
+    )
   }, []);
 
   //Функции
   function createPost() {
     const post = {
-        "title": "Catapult", 
-        "text": "A catapult is a ballistic device used to launch a projectile a great distance without the aid of gunpowder or other propellants – particularly various types of ancient and medieval siege engines", 
-        "image": "https://avatars.mds.yandex.net/get-zen_doc/1077599/pub_5b0c32489d5cb34163790c73_5b0c32947ddde8576ef10409/scale_1200",
-        "tags": ["legendary", "peace", "kaif"]
-    }
-    serverApi.addPost(post)
-    .then(
-      newPost=> {
-        console.log("Добавлено")
-      }
-    )
-    setPostFlag(true)
+      title: "Catapult",
+      text: "A catapult is a ballistic device used to launch a projectile a great distance without the aid of gunpowder or other propellants – particularly various types of ancient and medieval siege engines",
+      image:
+        "https://avatars.mds.yandex.net/get-zen_doc/1077599/pub_5b0c32489d5cb34163790c73_5b0c32947ddde8576ef10409/scale_1200",
+      tags: ["legendary", "peace", "kaif"],
+    };
+    serverApi.addPost(post).then((newPost) => {
+      
+    });
+    setPostFlag(true);
   }
 
   function deletePost(productId) {
-    serverApi.deletePost(productId)
-      .then(
-        console.log("Удалено")
-      )
-      setPostFlag(true)
+    serverApi.deletePost(productId).then(console.log("Удалено"));
+    setPostFlag(true);
   }
 
   function handleProductLike({ _id, likes }) {
@@ -79,7 +87,32 @@ export const App = () => {
           <HeaderContent user={userInformation} />
         </Header>
         <Content className="contentWrapper">
-          <PostList title="Welcome to Our Image Board!" content={content} onProductLike={handleProductLike} createPost={createPost} deletePost={deletePost}/>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  content={content}
+                  onProductLike={handleProductLike}
+                  createPost={createPost}
+                  deletePost={deletePost}
+                />
+              }
+            />
+
+            <Route
+              path="/posts/:postID"
+              element={
+              <OneCardPage 
+                onProductLike={handleProductLike} 
+              />}
+            />
+
+            <Route
+              path="*"
+              element={<Page404/>}
+            />
+          </Routes>
         </Content>
         <Footer>
           <FooterContent />

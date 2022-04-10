@@ -17,6 +17,15 @@ class ServerApi {
     }).then(errorResponse);
   }
 
+  //Получения поста по id
+  getPostId(id) {
+    return fetch(`${this._baseUrl}posts/${id}`, {
+      headers: {
+        authorization: this._token,
+      },
+    }).then(errorResponse);
+  }
+
   //Получения информации о пользователе
   getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {

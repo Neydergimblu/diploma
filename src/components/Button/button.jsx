@@ -11,7 +11,7 @@ export const ButtonContent = ({ type, text, createPost }) => {
 
   return (
     <>
-      <Button type={type} onClick={handlerAddPost} >{text}</Button>
+      <Button type={type} onClick={handlerAddPost} className={s.button}>{text}</Button>
     </>
   );
 };
