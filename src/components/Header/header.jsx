@@ -17,9 +17,8 @@ export const HeaderContent = ({ className, user }) => {
       <div className="container">
         <div className={s.menuWrapper}>
           <div className="logo" />
-          <Menu mode="horizontal" className={s.menu}>
-            <Menu.Item key="mail">Home</Menu.Item>
-            <Menu.Item key="app">Documents</Menu.Item>
+          <Menu mode="horizontal" className={s.menu} defaultSelectedKeys={['mail']}>
+            <Menu.Item key="mail">Главная</Menu.Item>
             <Menu.Item key="alipay">GetHub</Menu.Item>
           </Menu>
           <div>

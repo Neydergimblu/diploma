@@ -24,20 +24,23 @@ export const Post = ({
   const currentUser = useContext(CurrentUserContext);
   const isLiked = likes.some((id) => id === currentUser._id);
 
-  function handleClickLikeButton() {
+  function handleClickLikeButton(e) {
+    e.preventDefault();
     onProductLike({ _id, likes });
   }
 
   //Удаление моего поста
-  function deleteMyPost() {
+  function deleteMyPost(e) {
+    e.preventDefault();
     deletePost(_id);
   }
 
   return (
     <>
       <Col xs={{ span: 30 }} sm={16} md={12} lg={8} className={s.card_wrapper}>
-        <Link to={`/posts/${_id}`}>
+        <Link to={`/${_id}`}>
           <Card
+            hoverable
             className={s.card}
             cover={<img alt={title} src={image} className={s.image} />}
             description={text}

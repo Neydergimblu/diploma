@@ -6,10 +6,11 @@ import { FooterContent } from "./components/Footer/footer";
 
 import serverApi from "./utils/serverApi";
 import { CurrentUserContext } from "./context/currentUserContext";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { OneCardPage } from "./pages/OneCardPage";
 import { Page404 } from "./pages/Page404";
+import { EditPost } from "./pages/EditPost/EditPost";
 
 const { Header, Footer, Content } = Layout;
 
@@ -19,56 +20,43 @@ export const App = () => {
   const [userInformation, setUserInformation] = useState({});
   const [postFlag, setPostFlag] = useState(false);
 
+
   //Эффекты
   useEffect(() => {
-    serverApi.getPosts()
-    .then((newPostData) => {
-      setContent(newPostData);
-    })
-    .catch(
-      (error) => {
+    serverApi
+      .getPosts()
+      .then((newPostData) => {
+        setContent(newPostData);
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    )
+      });
     setPostFlag(false);
-  }, [postFlag]);
-
+  }, [postFlag, Route]);
 
   useEffect(() => {
     Promise.all([serverApi.getPosts(), serverApi.getUserInfo()])
-    .then(
-      ([postsData, userData]) => {
+      .then(([postsData, userData]) => {
         setContent(postsData);
         setUserInformation(userData);
-      }
-    )
-    .catch(
-      (error) => {
+      })
+      .catch((error) => {
         console.log(error);
-      }
-    )
+      });
   }, []);
 
   //Функции
-  function createPost() {
-    const post = {
-      title: "Catapult",
-      text: "A catapult is a ballistic device used to launch a projectile a great distance without the aid of gunpowder or other propellants – particularly various types of ancient and medieval siege engines",
-      image:
-        "https://avatars.mds.yandex.net/get-zen_doc/1077599/pub_5b0c32489d5cb34163790c73_5b0c32947ddde8576ef10409/scale_1200",
-      tags: ["legendary", "peace", "kaif"],
-    };
-    serverApi.addPost(post).then((newPost) => {
-      
-    });
-    setPostFlag(true);
-  }
-
+  //Удаление поста
   function deletePost(productId) {
     serverApi.deletePost(productId).then(console.log("Удалено"));
     setPostFlag(true);
   }
 
+  function targetFlag ({flag}) {
+    setPostFlag(flag)
+  }
+
+  //
   function handleProductLike({ _id, likes }) {
     const isLiked = likes.some((id) => id === userInformation._id);
     serverApi.changeLikeStatus(_id, isLiked).then((newCard) => {
@@ -87,34 +75,39 @@ export const App = () => {
           <HeaderContent user={userInformation} />
         </Header>
         <Content className="contentWrapper">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MainPage
-                  content={content}
-                  onProductLike={handleProductLike}
-                  createPost={createPost}
-                  deletePost={deletePost}
-                />
-              }
-            />
+          <div className="container">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <MainPage
+                    content={content}
+                    onProductLike={handleProductLike}
+                    deletePost={deletePost}
+                  />
+                }
+              />
 
-            <Route
-              path="/posts/:postID"
-              element={
-              <OneCardPage 
-                onProductLike={handleProductLike} 
-              />}
-            />
+              <Route
+                path="/:postID"
+                element={<OneCardPage />}
+              />
 
-            <Route
-              path="*"
-              element={<Page404/>}
-            />
-          </Routes>
+              <Route path="*" element={<Page404 />} />
+
+              <Route
+                path="/edit/:postID"
+                element={<EditPost title="Редактирование поста" targetFlag={targetFlag}/>}
+              />
+
+              <Route
+                path="/new"
+                element={<EditPost title="Создание поста" type="new" targetFlag={targetFlag}/>}
+              />
+            </Routes>
+          </div>
         </Content>
-        <Footer>
+        <Footer className="footer">
           <FooterContent />
         </Footer>
       </Layout>

@@ -7,3 +7,12 @@
 .subText {
 	margin-top: 5px;
 }
+
+.title{
+	color: #7D6EE7;
+	font-weight: 900;
+}
+
+.row {
+	min-height: 990px;
+}

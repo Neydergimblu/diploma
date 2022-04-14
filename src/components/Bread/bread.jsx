@@ -8,9 +8,9 @@ export const BreadcrumbContent = ({postTitle}) => {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
+        <Breadcrumb.Item>Главная</Breadcrumb.Item>
         <Breadcrumb.Item>
-          <Link to="/">All posts</Link>
+          <Link to="/">Все посты</Link>
         </Breadcrumb.Item>
         {postTitle && (
           <Breadcrumb.Item>

@@ -57,6 +57,18 @@ class ServerApi {
     }).then(errorResponse);
   }
 
+  //Изменить пост
+  editPost(post,postID) {
+    return fetch(`${this._baseUrl}posts/${postID}`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(post)
+    }).then(errorResponse);
+  }
+
   //Удалить пост
   deletePost(productId) {
     return fetch(`${this._baseUrl}posts/${productId}`, {
